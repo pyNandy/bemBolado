@@ -1,0 +1,37 @@
+{% if is_paginated %}
+<div class="col mt-3 mb-3">
+    <div class="row">
+        <div class="pagination">
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link bg-dark text-warning" href="?page=1">&laquo;</a> <!-- Link para a primeira página -->
+                </li>
+                <li class="page-item">
+                    <a class="page-link bg-dark text-warning" href="?page={{ page_obj.previous_page_number }}">&lsaquo;</a> <!-- Link para a página anterior -->
+                </li>
+                {% endif %}
+                {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                <li class="page-item active">
+                    <a class="page-link bg-warning text-dark" href="?page={{ num }}">{{ num }}</a> <!-- Página atual -->
+                </li>
+                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                <li class="page-item">
+                    <a class="page-link bg-dark text-warning" href="?page={{ num }}">{{ num }}</a> <!-- Páginas próximas à página atual -->
+                </li>
+                {% endif %}
+                {% endfor %}
+                {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link bg-dark text-warning" href="?page={{ page_obj.next_page_number }}">&rsaquo;</a> <!-- Link para a próxima página -->
+                </li>
+                <li class="page-item">
+                    <a class="page-link bg-dark text-warning" href="?page={{ page_obj.paginator.num_pages }}">&raquo;</a> <!-- Link para a última página -->
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endif %}
