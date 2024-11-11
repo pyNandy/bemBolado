@@ -304,7 +304,7 @@ class ResumoDaCompra(View):
             return redirect('perfil:criar')
 
         if not Perfil.objects.filter(usuario=self.request.user).exists():
-            messages.error(self.request, 'Usuário sem perfil.')
+            messages.error(self.request, 'Cadastro incompleto, atualize seus dados ao lado para concluir seu Pedido!!.')
             return redirect('perfil:criar')
 
         if not self.request.session.get('carrinho'):
@@ -324,7 +324,7 @@ class ResumoDaCompra(View):
             return redirect('perfil:criar')
 
         if not Perfil.objects.filter(usuario=self.request.user).exists():
-            messages.error(self.request, 'Usuário sem perfil.')
+            messages.error(self.request, 'Seu Cadastro está incompleto, atualize seus dados ao lado para concluir seu Pedido!!!.')
             return redirect('perfil:criar')
 
         if not self.request.session.get('carrinho'):
