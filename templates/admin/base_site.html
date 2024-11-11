@@ -12,8 +12,8 @@
                         if (data.unread_count > 0) {
                             // Cria um div para o alerta centralizado com estilo moderno
                             const alertDiv = `
-                                <div id="notification-alert" style="position: fixed; top: 15%; left: 50%; transform: translate(-50%, -50%); background: #f8f9fa; border: 1px solid #007bff; padding: 20px; z-index: 1000; text-align: center; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 8px;">
-                                    <p style="color: #007bff; font-weight: bold;">Você tem ${data.unread_count} novas notificações</p>
+                                <div id="notification-alert" style="position: fixed; top: 20%; left: 50%; transform: translate(-50%, -50%); background: #f8f9fa; border: 1px solid #007bff; padding: 20px; z-index: 1000; text-align: center; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 8px;">
+                                    <p style="color: #007bff; font-weight: bold;">Você tem ${data.unread_count} novo(s) Pedido(s) !!!</p>
                                 </div>
                             `;
                             // Remove qualquer alerta existente e adiciona o novo
@@ -22,7 +22,7 @@
 
                             // Adiciona o botão após 2 segundos
                             setTimeout(function() {
-                                $('#notification-alert').append('<button id="mark-as-read" style="margin-top: 10px; background: #007bff; color: #fff; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer;">Marcar todas como lidas</button>');
+                                $('#notification-alert').append('<button id="mark-as-read" style="margin-top: 10px; background: #007bff; color: #fff; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer;">Confirmar recebimento do(s) Pedido(s)</button>');
                             }, 2000);
                         } else {
                             $('#notification-alert').remove();
@@ -39,7 +39,7 @@
                         'X-CSRFToken': '{{ csrf_token }}'
                     },
                     success: function() {
-                        alert('Todas as notificações foram marcadas como lidas.');
+                        alert('O(s) Pedido(s) formam recebidos!!! Verfique a sessão dos pedidos.');
                         $('#notification-alert').remove();
                     }
                 });

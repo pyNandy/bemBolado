@@ -2,14 +2,25 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-    {% load static %}
     {% include 'parciais/_head.html' %}
-    <title>{% block titulo %}{% endblock %}| Bem Bolado</title>
+    <title>{% block titulo %}{% endblock %} | Bem Bolado</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-        // Função para atualizar a página a cada 1 minuto (30000 milissegundos)
-        setInterval(function() {
-            location.reload();
-        }, 30000);
+        function atualizarNotificacoes() {
+            $.ajax({
+                url: '{% url "notificar:listar_notificacao" %}', // URL para listar notificações
+                type: 'GET',
+                success: function(data) {
+                    $('#notificacoes').html(data); 
+                },
+                error: function(xhr, status, error) {
+                    console.error('Erro ao atualizar notificações:', error);
+                }
+            });
+        }
+
+        // Atualize as notificações a cada 30 segundos
+        setInterval(atualizarNotificacoes, 30000);
     </script>
     <style>
         body {
@@ -37,6 +48,9 @@
     {% include 'parciais/_nav.html' %}
     <main class="container mt-4 mb-4">
         {% include 'parciais/_messages.html' %}
+        <div id="notificacoes">
+            <!-- As notificações serão carregadas aqui -->
+        </div>
         {% block conteudo %}{% endblock %}
     </main>
     {% include 'parciais/_footer.html' %}

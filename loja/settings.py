@@ -16,6 +16,7 @@ SECRET_KEY = '34s66f2twc8c&q*i_@@4i(yp7wp0-d_hi3il7%1iom55xz(87w'
 DEBUG = True
 
 ALLOWED_HOSTS = ['ernane.pythonanywhere.com']
+# ALLOWED_HOSTS = []
 
 
 # Application definition

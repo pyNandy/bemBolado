@@ -27,18 +27,18 @@
     </div>
     <div class="col-lg mt-auto">
         {% if request.user.is_authenticated %}
-        <div class="d-inline-block">
-            <a class="btn btn-lg btn-dark text-warning" href="{% url 'produto:resumodacompra' %}" style="width: 190px;">
-                Avançar
+        <div class="d-block my-2">
+            <a class="btn btn-lg btn-dark text-warning btn-block" href="{% url 'produto:resumodacompra' %}">
+                Ir para pagamento
             </a>
         </div>
-        <div class="d-inline-block">
-            <a class="btn btn-lg btn-dark text-warning" href="{% url 'produto:lista' %}" style="width: 240px;">
+        <div class="d-block my-2">
+            <a class="btn btn-lg btn-dark text-warning btn-block" href="{% url 'produto:lista' %}">
                 Continuar a Compra
             </a>
         </div>
         {% else %}
-        <a class="btn btn-lg btn-block btn-dark text-warning" href="{% url 'perfil:criar' %}">
+        <a class="btn btn-lg btn-dark text-warning btn-block" href="{% url 'perfil:criar' %}">
             Ir para pagamento
         </a>
         {% endif %}
@@ -49,7 +49,7 @@
     <div class="col">
         <h3>Seu Carrinho está vazio</h3>
         <p class="lead">Não há produtos no seu carrinho.</p>
-        <a class="btn btn-dark text-warning" href="{% url 'produto:lista' %}" style="green">
+        <a class="btn btn-dark text-warning btn-block" href="{% url 'produto:lista' %}">
             Ir para o Cardapio
         </a>
     </div>

@@ -34,7 +34,8 @@ html {
     background-color: #1f1e1f;
     position: fixed;
     padding-left: 30rem;
-    transition: height 0.6s ease; /* Animação suave */
+    transition: height 0.6s ease;
+    /* Animação suave */
 }
 
 .logo {
@@ -71,7 +72,8 @@ html {
     padding-left: 1rem;
     padding-right: 1rem;
     color: rgb(255, 255, 255);
-    font-size: 1.8rem !important; /* Diminuir o tamanho da fonte e garantir a aplicação */
+    font-size: 1.8rem !important;
+    /* Diminuir o tamanho da fonte e garantir a aplicação */
     text-transform: uppercase;
     font-weight: 500;
     transition: all 200ms ease-in;
@@ -528,17 +530,21 @@ header {
     top: 0;
     width: 100%;
     z-index: 1000;
-    background-color: #e70a0a; /* Ajuste a cor de fundo conforme necessário */
-    transition: height 0.6s ease; /* Transição suave */
+    background-color: #e70a0a;
+    /* Ajuste a cor de fundo conforme necessário */
+    transition: height 0.6s ease;
+    /* Transição suave */
 }
 
 .content.on {
-    height: auto; /* Expande para ocupar metade da altura da viewport */
+    height: auto;
+    /* Expande para ocupar metade da altura da viewport */
     overflow-y: auto;
 }
 
 body.menu-open .content .list-menu li a {
-    font-size: 1.2rem !important; /* Diminuir o tamanho da fonte no menu hamburguer */
+    font-size: 1.2rem !important;
+    /* Diminuir o tamanho da fonte no menu hamburguer */
     padding-top: 1rem;
     padding-bottom: 1rem;
     padding-left: 0.5rem;
@@ -550,5 +556,6 @@ body.menu-open .content .list-menu li a {
 }
 
 .content .list-menu li a i {
-    font-size: 2.6rem; /* Ajuste para aumentar o tamanho dos ícones */
+    font-size: 2.6rem;
+    /* Ajuste para aumentar o tamanho dos ícones */
 }
