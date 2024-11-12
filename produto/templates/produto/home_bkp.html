@@ -40,8 +40,11 @@
             <h1>Deixe seu dia mais saboroso!!!</h1>
             <h2>As pizzas mais recheadas da Região</h2>
             <div class="btn">
+
                 <button class="reservar" onclick="window.location.href='#cardapio'">Reserve a sua!</button>
-                <button class="montar" onclick="window.location.href='{% url 'perfil:criar' %}'">Faça seu Login ou crie sua conta!</button>
+                <button class="montar" onclick="window.location.href='{% url 'perfil:criar' %}'">Faça seu Login ou crie sua conta!</button> 
+                
+
             </div>
         </div>
     </section>
@@ -50,14 +53,7 @@
         <div class="main">
             <div class="contentsobre">
                 <h2>Sobre nós</h2>
-                <p>Bem-vindo ao site da Bem Bolado Pizzaria!</p>
-                <p>Nós da Bem Bolado Pizzaria somos dedicados a oferecer pizzas deliciosas, 
-                preparadas com os melhores ingredientes e aquele toque especial que só a nossa pizzaria tem. 
-                Este site é um projeto acadêmico desenvolvido para a Universidade Cruzeiro do Sul como parte do trabalho 
-                de conclusão de curso da graduação em Sistema de Informações. O objetivo deste trabalho é aplicar os conhecimentos adquiridos ao longo do curso,
-                desenvolvendo uma plataforma de e-commerce completa e funcional.
-                Vale ressaltar que a Bem Bolado Pizzaria é uma empresa fictícia e imaginária,
-                criada exclusivamente para fins educacionais.</p>
+                <p>Esse site é um trabalho de faculdade proposto pela Universidade Cruzeiro do Sul, para o trabalho de conclusão de curso, portanto a empresa Bem Bolado Pizzaria é uma empresa imaginária.</p>
             </div>
             <div class="img-cozinha">
                 <img src="{% static 'image/cozinha.jpg' %}" alt="">
@@ -92,7 +88,7 @@
             <div class="item">
                 <img src="{% static 'image/frete.png' %}" alt="bebidas">
                 <div class="info">
-                    <h3>ENTREGA GRÁTIS <br> Faça um pedido e aproveite a entrega grátis disponível para você.</h3>
+                    <h3>ENTREGA GRÁTIS <br> Faça um pedido e aproveite a entrega gratis disponivel para você.</h3>
                 </div>
             </div>
         </div>
@@ -100,8 +96,7 @@
 
     <section class="contatos" id="contatos">
         <h3>Contate-nos</h3>
-        <h4>Nosso horário de atendimento é das 20:00 às 02:00 de terça à domingo</h4>
-        <h5>Localizado na Rua G no Bairro Fazenda Santo Antonio na cidade de São José em Santa Catarina. </h5>
+        <h4>Nosso horário de atendimento é das 20:00 às 02:00 de terça à Domingo</h4>
         <br>
         <h5>Siga-nos em nossas redes sociais e fique por dentro das promoções!</h5>
         <br>
@@ -127,19 +122,6 @@
 
     <script src="{% static 'assets/custom/js/scripts_home.js' %}"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const anchors = document.querySelectorAll('.list-menu a');
-
-            anchors.forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                });
-            });
-        });
-
         let show = true;
         const menuContent = document.querySelector('.content');
         const menuToggle = menuContent.querySelector('.menu-toggle');
