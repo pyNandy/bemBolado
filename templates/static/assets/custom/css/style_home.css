@@ -287,7 +287,7 @@ html {
 }
 
 .contentsobre p {
-    text-align: center;
+    text-align: justify;
     font-size: 1.8rem;
     width: 600px;
 }
@@ -329,6 +329,13 @@ html {
 .contatos-secao div:hover {
     color: #ffc506;
 }
+
+
+.contatos-secao div span {
+    display: inline-block;
+    vertical-align: middle;
+}
+
 
 footer {
     height: 25px;
