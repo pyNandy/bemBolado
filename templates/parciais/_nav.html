@@ -61,10 +61,14 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="text-warning nav-link" href="{% url 'produto:lista' %}">Pizzas<span class="sr-only">(página atual)</span></a>
+                        <a class="text-warning nav-link" href="{% url 'produto:home' %}">Home<span class="sr-only">(página atual)</span></a>
+                    </li>
+
+                    <li class="nav-item active">
+                        <a class="text-warning nav-link" href="{% url 'produto:lista' %}">Pizzas<span class="sr-only">(página produtos)</span></a>
                     </li>
                     <li class="nav-item active">
-                        <a class="text-warning nav-link" href="{% url 'produto:lista_doces' %}">Pizzas Doces<span class="sr-only">(página atual)</span></a>
+                        <a class="text-warning nav-link" href="{% url 'produto:lista_doces' %}">Pizzas Doces<span class="sr-only">(página produtos)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="text-warning nav-link" href="{% url 'produto:lista_bebidas' %}">Bebidas</a>
