@@ -346,8 +346,24 @@ html {
     vertical-align: middle;
 }
 
-.contatos-secao span{
-    color: white;
+/* Telefones específicos */
+.contatos-secao a {
+    color: white; /* Ajuste a cor conforme necessário */
+    text-decoration: none;
+}
+
+.contatos-secao a:hover {
+    color: #ffc506; /* Cor quando o link é hover */
+}
+
+/* Para garantir que o número de telefone não fique azul */
+.contatos-secao span {
+    color: white; /* Ajuste a cor conforme necessário */
+}
+
+/* Para garantir que o número de telefone dentro do link não fique azul */
+.contatos-secao a:link, .contatos-secao a:visited {
+    color: white; /* Ajuste a cor conforme necessário */
 }
 
 
