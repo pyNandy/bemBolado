@@ -105,7 +105,8 @@
 
     <section class="contatos" id="contatos">
         <h3>Contate-nos</h3>
-        <h4>Nosso horário de atendimento é das 18:00 às 02:00 de terça à Domingo</h4><br>
+        <h4>Nosso horário de atendimento é das 18:00 às 12:00 
+            <br>Segunda à Domingo</h4><br>
         <h5>Estamos localizados no endereço:<br>
             Rua Onélia Terezinha Sartori n° 03, Forquilhas, São José, SC
         </h5>
@@ -130,7 +131,7 @@
         
 
     <footer>
-        <h4>Projeto Integrador Transdisciplinar em Sistemas de Informação II - Aluno: Ernane da Silva Oliveira - RGM: 25719122</h4>
+        <h4>Projeto Integrador Transdisciplinar em Sistemas de Informação II</h4>
     </footer>
 
     <script src="{% static 'assets/custom/js/scripts_home.js' %}"></script>
@@ -147,7 +148,7 @@
         });
 
         window.addEventListener('resize', () => {
-            if (window.innerWidth > 768 && menuContent.classList.contains('on')) { // Ajuste a largura conforme necessário
+            if (window.innerWidth > 768 && menuContent.classList.contains('on')) { 
                 document.body.style.overflow = 'initial';
                 document.body.classList.remove('menu-open');
                 menuContent.classList.remove('on');
