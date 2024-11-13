@@ -346,6 +346,10 @@ html {
     vertical-align: middle;
 }
 
+.contatos-secao span{
+    color: white;
+}
+
 
 footer {
     height: 25px;
