@@ -98,8 +98,8 @@
                     <br>
                     <div class="text-center">
                         {% if request.user.is_authenticated %}
-                        <a class="btn btn-dark btn-lg btn-block mr-2 text-warning" href="{% url 'produto:lista_doces' %}">
-                            Continuar a Compra
+                        <a class="btn btn-dark btn-lg btn-block mr-2 text-warning" href="{% url 'produto:home' %}#cardapio">
+                            Continuar a compra
                         </a>
                         {% else %}
                         <a class="btn btn-dark btn-lg btn-block text-warning" href="{% url 'perfil:criar' %}">

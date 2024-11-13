@@ -165,6 +165,8 @@ html {
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
+    padding-top: 7rem;
+    margin-top: -7rem;
 }
 
 .cardapio h2 {
@@ -251,15 +253,18 @@ html {
 .sobre-nos {
     background-color: #1f1e1f;
     width: 100%;
-    padding-bottom: 5rem;
+    padding-bottom: 10rem;
     color: white;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding-top: 5rem;
+    margin-top: -5rem;
+
+
 }
 
 .contentsobre {
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -267,7 +272,6 @@ html {
 }
 
 .main {
-
     display: flex;
     justify-content: space-between;
 }
@@ -275,7 +279,7 @@ html {
 .sobre-nos img {
     width: 400px;
     height: 400px;
-    margin-top: 10rem;
+    margin-top: 1rem;
     margin-left: 10rem;
     border: 2px solid rgb(155, 155, 155);
 }
@@ -287,27 +291,33 @@ html {
 }
 
 .contentsobre p {
-    text-align: justify;
+    text-align: justify; /* Alinha o texto com justificação */
     font-size: 1.8rem;
     width: 600px;
 }
+
 
 .contatos {
     width: 100%;
     background-color: #1f1e1f;
     display: flex;
     flex-direction: column;
-    justify-content: Center;
-    align-items: center;
+    justify-content: center; /* Centraliza verticalmente */
+    align-items: center; /* Centraliza horizontalmente */
     font-size: 1.8rem;
     color: white;
-    padding-bottom: 4rem;
+    padding: 4rem 0; /* Adiciona padding na parte superior e inferior */
 }
 
 .contatos h3 {
     font-size: 6rem;
     margin-bottom: 3rem;
     font-family: 'Indie Flower', cursive;
+    text-align: center; /* Centraliza o texto */
+}
+
+.contatos h4, .contatos h5 {
+    text-align: center; /* Centraliza o texto */
 }
 
 .contatos-secao {
@@ -319,17 +329,17 @@ html {
 
 .contatos-secao i {
     margin-right: 1rem;
-
 }
 
 .contatos-secao div {
     cursor: pointer;
+    display: flex;
+    align-items: center;
 }
 
 .contatos-secao div:hover {
     color: #ffc506;
 }
-
 
 .contatos-secao div span {
     display: inline-block;
@@ -550,7 +560,7 @@ header {
 }
 
 body.menu-open .content .list-menu li a {
-    font-size: 1.2rem !important;
+    font-size: 1.8rem !important;
     /* Diminuir o tamanho da fonte no menu hamburguer */
     padding-top: 1rem;
     padding-bottom: 1rem;
