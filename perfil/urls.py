@@ -13,16 +13,12 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
 
     # URLs para recuperação de senha
-
     path('reset_password/', auth_views.PasswordResetView.as_view(success_url=reverse_lazy('perfil:password_reset_done')), name="reset_password"),
     path('reset_password_done/', auth_views.PasswordResetDoneView.as_view(), name="password_reset_done"),
-    # path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name="password_reset_confirm"),
-    path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(), name="password_reset_complete"),
-
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(success_url=reverse_lazy('perfil:password_reset_complete')), name="password_reset_confirm"),
-
-    
+    path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(), name="password_reset_complete"),
 ]
+
 
 
  
