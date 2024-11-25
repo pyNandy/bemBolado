@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block titulo %}Pagamento | {% endblock %}
+{% load omfilters %}
+{% load static %}
+<br>
+{% block conteudo %}
+<br><br>
+<div class="alert alert-success" role="alert">
+    PEDIDO REALIZADO COM SUCESSO!
+</div>
+<p><strong>Forma de Pagamento:</strong> {{ pedido.forma_pagamento.pagamento }}</p>
+<p><strong>Valor Total do Produto:</strong> R$ {{ valor_total_produto }}</p>
+{% if pedido.forma_pagamento.pagamento == 'Dinheiro' %}
+    <p><strong>Valor em Dinheiro:</strong> R$ {{ valor_dinheiro }}</p>
+    <p><strong>Troco:</strong> R$ {{ troco }}</p>
+{% endif %}
+<div class="row">
+    <div class="col">
+        <h4 style="color: red">Estimativa de preparo e entrega: 40 minutos.</h4>
+    </div>
+</div>
+{% include 'parciais/_pedido.html' %}
+{% endblock %}
+

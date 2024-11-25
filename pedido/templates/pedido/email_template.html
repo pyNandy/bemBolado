@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmação de Pedido</title>
+</head>
+<body>
+    <h1>Confirmação de Pedido</h1>
+    <p>Olá,</p>
+    <p>Seu pedido foi recebido com sucesso!</p>
+    
+    
+    <ul>
+        {% for item in pedido.itens.all %}
+            <li>{{ item.produto.nome }} - {{ item.quantidade }} x R$ {{ item.produto.preco|floatformat:2 }}</li>
+        {% endfor %}
+    </ul>
+    
+    <h2>Resumo do Pedido</h2>
+    <p><strong>Total: R$ {{ pedido.total|floatformat:2 }}</strong></p>
+    <p>Forma de Pagamento: {{ pedido.forma_pagamento.pagamento }}</p>
+    <p>Status do Pedido: {{ pedido.get_status_display }}</p>
+
+    <h2>Informações do Cliente</h2>
+    <p>Nome: {{ pedido.usuario.first_name }} {{ pedido.usuario.last_name }}</p>
+    <p>Email: {{ pedido.usuario.email }}</p>
+    <p>Telefone: {{ pedido.usuario.perfil.telefone }}</p>
+    <p>Endereço: {{ pedido.usuario.perfil.endereco }}, {{ pedido.usuario.perfil.numero }}
+    {% if pedido.usuario.perfil.complemento %}
+        , {{ pedido.usuario.perfil.complemento }}
+    {% endif %}
+    , {{ pedido.usuario.perfil.bairro }}, {{ pedido.usuario.perfil.cidade }} - {{ pedido.usuario.perfil.cep }}</p>
+
+    <p>Para mais informações entre em contato conosco.</p>
+    <p>Atenciosamente,<br>Pizzaria Bem Bolado</p>
+</body>
+</html>
+

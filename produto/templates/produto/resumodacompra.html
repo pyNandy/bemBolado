@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% load omfilters %}
+
+{% block titulo %}Resumo do Pedido |{% endblock %}
+
+{% block conteudo %}
+<br><br>
+<div class="row mb-5">
+    <div class="col-lg">
+        <h2>Resumo do Pedido</h2>
+        <p class="lead">Para realizar seu pedido vamos precisar confirmar seus dados, este é um ambiente protegido</p>
+        <p class="lead">Dados do usuário:</p>
+        <dl class="row">
+            <dt class="col-lg-2">Nome:</dt>
+            <dd class="col-lg-4">{{ usuario.first_name }}</dd>
+            <dt class="col-lg-2">Sobrenome:</dt>
+            <dd class="col-lg-4">{{ usuario.last_name }}</dd>
+            <dt class="col-lg-2">Telefone:</dt>
+            <dd class="col-lg-4">{{ usuario.perfil.telefone }}</dd>
+            <dt class="col-lg-2">Data de Nascimento:</dt>
+            <dd class="col-lg-4">{{ usuario.perfil.data_nascimento }}</dd>
+            <dt class="col-lg-2">CPF:</dt>
+            <dd class="col-lg-4">{{ usuario.perfil.cpf }}</dd>
+            <dt class="col-lg-2">E-mail:</dt>
+            <dd class="col-lg-4">{{ usuario.email }}</dd>
+        </dl>
+        <p>Para alterar os dados de cadastro: <a href="{% url 'perfil:criar' %}">clique aqui</a></p>
+        <p class="lead">Endereço de Entrega:</p>
+        <dl class="row">
+            <dt class="col-lg-2">Endereço:</dt>
+            <dd class="col-lg-4">{{ usuario.perfil.endereco }}</dd>
+            <dt class="col-lg-2">Número:</dt>
+            <dd class="col-lg-4">{{ usuario.perfil.numero }}</dd>
+            <dt class="col-lg-2">Complemento:</dt>
+            <dd class="col-lg-4">{{ usuario.perfil.complemento }}</dd>
+            <dt class="col-lg-2">Bairro:</dt>
+            <dd class="col-lg-4">{{ usuario.perfil.bairro }}</dd>
+            <dt class="col-lg-2">Cidade:</dt>
+            <dd class="col-lg-4">{{ usuario.perfil.cidade }}</dd>
+            <dt class="col-lg-2">CEP:</dt>
+            <dd class="col-lg-4">{{ usuario.perfil.cep }}</dd>
+        </dl>
+        <p>Para alterar o endereço de entrega: <a href="{% url 'perfil:criar' %}">clique aqui</a></p>
+    </div>
+</div>
+<div class="row mt-3">
+    <div class="col">
+        <h3>Lista de produtos</h3>
+        <p class="lead">Itens adicionados</p>
+        {% include 'parciais/_carrinho.html' %}
+    </div>
+</div>
+<div class="row mt-3">
+    <div class="col">
+        <p class="lead text-center"><span class="font-weight-bold">Total dos Itens:</span> {{ carrinho|cart_totals|formata_preco }}</p>
+    </div>
+</div>
+<div class="alert alert-primary" role="alert">
+    <p class="lead font-weight-bold text-center mb-1">
+        Atenção: O pagamento será efetuado na entrega do produto, diretamente ao motoboy.
+    </p>
+</div>
+
+<div>
+    <h4 class="h5">Escolha uma Forma de pagamento:</h4>
+    <form method="post" action="{% url 'pedido:salvarpedido' %}" onsubmit="return validateForm()">
+        {% csrf_token %}
+        
+        <div class="form-row mb-4">
+            <div class="form-group col-md-6">
+                <label for="id_forma_pagamento"></label><br>
+                <select id="id_forma_pagamento" name="forma_pagamento" class="form-control form-control-sm" onchange="toggleDinheiroField()" required>
+                    <option value="" selected disabled>Selecione uma forma de pagamento</option>
+                    {% for tipo in tipos %}
+                        <option value="{{ tipo.id }}">{{ tipo.pagamento }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group col-md-6" id="id_valor_dinheiro" style="display:none;">
+                <label for="valor_pagamento">Digite o valor</label>
+                <input type="text" id="valor_pagamento" name="valor_pagamento" class="form-control form-control-sm">
+                <div class="invalid-feedback">Digite um valor válido, maior ou igual ao valor total dos itens.</div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-dark btn-lg btn-block mr-2 text-warning">Finalizar Compra</button>
+    </form>
+    
+</div>
+<br>
+<div>
+    <a class="btn btn-dark btn-lg btn-block mr-2 text-warning" href="{% url 'produto:home' %}#cardapio">
+        Voltar para o Cárdapio
+    </a>
+
+</div>
+<script>
+function toggleDinheiroField() {
+    const formaPagamento = document.getElementById('id_forma_pagamento');
+    const valorDinheiroField = document.getElementById('id_valor_dinheiro');
+    const valorPagamentoInput = document.getElementById('valor_pagamento');
+    if (formaPagamento.options[formaPagamento.selectedIndex].text === 'Dinheiro') {
+        valorDinheiroField.style.display = 'block';
+        valorPagamentoInput.required = true;
+    } else {
+        valorDinheiroField.style.display = 'none';
+        valorPagamentoInput.required = false;
+    }
+}
+
+function validateForm() {
+    const valorPagamentoInput = document.getElementById('valor_pagamento');
+    const valorPagamentoValue = valorPagamentoInput.value;
+    const valorRegex = /^\d+,\d{2}$/;
+    const totalItemsValue = parseFloat("{{ carrinho|cart_totals|floatformat:2 }}".replace(',', '.'));
+
+    if (valorPagamentoInput.required && !valorRegex.test(valorPagamentoValue)) {
+        valorPagamentoInput.classList.add('is-invalid');
+        return false;
+    } else if (valorPagamentoInput.required && parseFloat(valorPagamentoValue.replace(',', '.')) < totalItemsValue) {
+        valorPagamentoInput.classList.add('is-invalid');
+        return false;
+    }
+
+    return true;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    toggleDinheiroField();
+    document.getElementById('id_forma_pagamento').addEventListener('change', toggleDinheiroField);
+});
+</script>
+{% endblock %}

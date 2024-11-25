@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block titulo %}Criar perfil | {% endblock %}
+{% block conteudo %}
+<br>
+<br>
+<div class="row">
+    <div class="col-lg mt-3">
+        <h4>Cadastro</h4>
+        <div class="alert alert-info" role="alert">
+            Utilize o formulário a seguir para se cadastrar e efetuar seu login.            
+        </div>
+        <p>Caso já tenha um usuario e senha cadastrado, basta entrar com seu login <a href="{% url 'perfil:login' %}">clicando aqui</a></p>
+        
+        <form method="POST" action="{% url 'perfil:criar' %}">
+            {% csrf_token %}
+            {{ userform|crispy }}
+            {{ perfilform|crispy }}
+            <div class="row">
+                <div class="col">
+                    <button type="submit" class='btn btn-dark btn-block btn-lg text-warning'>Criar Cadastro</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    function formatarTelefone(elemento) {
+        let telefone = elemento.value.replace(/\D/g, '');
+        telefone = telefone.replace(/^(\d{2})(\d)/g, '($1) $2');
+        telefone = telefone.replace(/(\d)(\d{4})$/, '$1-$2');
+        elemento.value = telefone;
+    }
+
+    function formatarData(elemento) {
+        let data = elemento.value.replace(/\D/g, '');
+        if (data.length <= 2) {
+            elemento.value = data;
+        } else if (data.length <= 4) {
+            elemento.value = data.replace(/(\d{2})(\d)/, '$1/$2');
+        } else {
+            elemento.value = data.replace(/(\d{2})(\d{2})(\d)/, '$1/$2/$3');
+        }
+    }
+
+    function formatarCPF(elemento) {
+        let cpf = elemento.value.replace(/\D/g, '');
+        if (cpf.length <= 3) {
+            elemento.value = cpf;
+        } else if (cpf.length <= 6) {
+            elemento.value = cpf.replace(/(\d{3})(\d)/, '$1.$2');
+        } else if (cpf.length <= 9) {
+            elemento.value = cpf.replace(/(\d{3})(\d{3})(\d)/, '$1.$2.$3');
+        } else {
+            elemento.value = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+        }
+    }
+    
+    function formatarCEP(elemento) {
+        let cep = elemento.value.replace(/\D/g, '');
+        if (cep.length <= 5) {
+            elemento.value = cep;
+        } else {
+            elemento.value = cep.replace(/(\d{5})(\d{3})/, '$1-$2');
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const telefoneInput = document.getElementById('id_telefone');
+        const dataInput = document.getElementById('id_data_nascimento');
+        const cpfInput = document.getElementById('id_cpf');
+        const cepInput = document.getElementById('id_cep'); // Corrigido para pegar o campo correto
+        
+        if (telefoneInput) {
+            telefoneInput.addEventListener('input', (event) => {
+                formatarTelefone(event.target);
+            });
+        }
+        
+        if (dataInput) {
+            dataInput.addEventListener('input', (event) => {
+                formatarData(event.target);
+            });
+        }
+        
+        if (cpfInput) {
+            cpfInput.addEventListener('input', (event) => {
+                formatarCPF(event.target);
+            });
+        }
+        
+        if (cepInput) {
+            cepInput.addEventListener('input', (event) => {
+                formatarCEP(event.target);
+            });
+        }
+    });
+</script>
+{% endblock %}

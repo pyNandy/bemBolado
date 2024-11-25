@@ -1,0 +1,121 @@
+{% load omfilters %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bem Bolado</title>
+    <style>
+        .custom-navbar {
+            background-color: #1f1e1f;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            font-family: 'Noto Sans', cursive;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+            font-variation-settings: "wdth" 100;
+        }
+    
+        .navbar-toggler .navbar-toggler-icon {
+            background-image: url('data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="orange" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E');
+        }
+    
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+    
+        .logo img {
+            margin-right: 10px;
+            width: 50px; /* Ajuste a largura conforme necessário */
+            height: auto; /* Mantém a proporção da imagem */
+        }
+    
+        .logo h3 {
+            margin: 0;
+        }
+
+    </style>
+    <!-- Outros links de CSS e scripts -->
+</head>
+<body>
+    <!-- Seu conteúdo HTML -->
+    <nav class="navbar custom-navbar navbar-expand-lg fixed-top">
+        <div class="container text-light">
+            <a class="text-warning navbar-brand" href="{% url 'produto:home' %}">
+                <div class="logo">
+                    <img src="{% static 'image/logo_home.png' %}" alt="Cupcake" class="logo-img">
+                    <h3>Bem Bolado</h3>
+                </div>
+            </a>
+            <button class="navbar-toggler text-warning" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="text-warning nav-link" href="{% url 'produto:home' %}">Home<span class="sr-only">(página atual)</span></a>
+                    </li>
+
+                    <li class="nav-item active">
+                        <a class="text-warning nav-link" href="{% url 'produto:lista' %}">Pizzas<span class="sr-only">(página produtos)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="text-warning nav-link" href="{% url 'produto:lista_doces' %}">Pizzas Doces<span class="sr-only">(página produtos)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="text-warning nav-link" href="{% url 'produto:lista_bebidas' %}">Bebidas</a>
+                    </li>
+                    {% if request.user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a class="text-warning nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Conta
+                        </a>
+                        <div class="dropdown-menu bg-dark text-warning" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item text-warning" href="{% url 'pedido:lista' %}">Meus pedidos</a>
+                            <a class="dropdown-item text-warning" href="{% url 'perfil:criar' %}">Atualizar Cadastro</a>
+                            <a class="dropdown-item text-warning" href="{% url 'perfil:logout' %}">Sair</a>
+                        </div>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="text-warning nav-link" href="{% url 'perfil:login' %}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="text-warning nav-link" href="{% url 'perfil:criar' %}">Criar conta</a>
+                    </li>
+                    {% endif %}
+                    {% if request.session.carrinho %}
+                    <li class="nav-item">
+                        <a class="text-warning nav-link nav-cart-link active" href="{% url 'produto:carrinho' %}">
+                            <span class="nav-cart-text mr-1">
+                                Carrinho
+                            </span>
+                            <span class="nav-cart-count mr-1">
+                                <strong>{{ request.session.carrinho|cart_total_qtd }}x</strong>
+                            </span>
+                            <span class="nav-cart-icon mr-2">
+                                <i class="fas fa-shopping-cart"></i>
+                            </span>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+                <form class="form-inline my-2 my-lg-0" method="GET" action="{% url 'produto:busca' %}">
+                    <input name="termo" value="{{ request.GET.termo }}" class="form-control mr-sm-2" type="search"
+                        placeholder="Buscar" aria-label="Busca">
+                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Busca</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+</body>
+</html>

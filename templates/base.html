@@ -1,0 +1,58 @@
+{% load static %}
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    {% include 'parciais/_head.html' %}
+    <title>{% block titulo %}{% endblock %} | Bem Bolado</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        function atualizarNotificacoes() {
+            $.ajax({
+                url: '{% url "notificar:listar_notificacao" %}', // URL para listar notificações
+                type: 'GET',
+                success: function(data) {
+                    $('#notificacoes').html(data); 
+                },
+                error: function(xhr, status, error) {
+                    console.error('Erro ao atualizar notificações:', error);
+                }
+            });
+        }
+
+        // Atualize as notificações a cada 30 segundos
+        setInterval(atualizarNotificacoes, 30000);
+    </script>
+    <style>
+        body {
+            /* background-image: url('{% static "image/pizza_fundo_base.jpg" %}');
+            background: no-repeat center center fixed;
+            background-size: cover;
+            background-blend-mode: multiply; */
+            background-color: #dcdcdc;
+        }
+
+        .navbar-brand {
+            font-family: 'Noto Sans', cursive;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+            font-variation-settings: "wdth" 100;
+        }
+
+        .navbar-toggler .navbar-toggler-icon {
+            background-image: url('data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="orange" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E');
+        }
+    </style>
+</head>
+<body>
+    {% include 'parciais/_nav.html' %}
+    <main class="container mt-4 mb-4">
+        {% include 'parciais/_messages.html' %}
+        <div id="notificacoes">
+            <!-- As notificações serão carregadas aqui -->
+        </div>
+        {% block conteudo %}{% endblock %}
+    </main>
+    {% include 'parciais/_footer.html' %}
+</body>
+</html>

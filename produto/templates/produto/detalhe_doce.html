@@ -1,0 +1,166 @@
+{% extends 'base.html' %}
+{% load omfilters %}
+{% block titulo %} {{ produto.nome_produto_3 }} | {% endblock %}
+{% block conteudo %}
+{% load static %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+<style>
+    .fade-slide-in {
+        animation: fadeSlideIn 0.5s ease-in-out;
+    }
+
+    .fade-slide-out {
+        animation: fadeSlideOut 0.5s ease-in-out;
+    }
+
+    @keyframes fadeSlideIn {
+        0% {
+            opacity: 0;
+            transform: translateX(-100%);
+        }
+        100% {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes fadeSlideOut {
+        0% {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        100% {
+            opacity: 0;
+            transform: translateX(100%);
+        }
+    }
+
+    body {
+        background-image: url('{% static "image/fundo_forno.jpg" %}');
+        background-size: cover; 
+        background-repeat: no-repeat; 
+        background-position: center; 
+        color: #ffffff; 
+    
+    .product-old-price {
+        color: #ffffff !important; 
+        font-size: 20px;
+    }                 
+    }
+</style>
+
+<br>
+<br>
+<div class="row fade-slide-in">
+    <div class="col-lg animate__animated animate__fadeIn">
+        <div class="row no-gutters">
+            <div class="col-lg-12">
+                {% if produto.imagem %}
+                <img class="img-fluid animate__animated animate__zoomIn" src="{{ produto.imagem.url }}" style="width: 400px; height: auto;">
+                {% endif %}
+                <div class="mt-4 mb-4">
+                    <h5 class="animate__animated animate__fadeInUp">{{ produto.descricao_venda_longa|linebreaks }}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg animate__animated animate__fadeIn">
+        <div class="mt-4 mt-lg-0">
+            <h1 class="h2 animate__animated animate__bounceIn">{{ produto.nome_produto_3 }}</h1>
+            <p class="lead animate__animated animate__fadeIn">{{ produto.descricao_venda_curta }}</p>
+            <br>
+            <h1 class='h4 animate__animated animate__fadeIn'>Preço promocional</h1>
+            <p class="lead">
+                {% if produto.preco_de_venda_promocional %}
+                <span id="variation-preco-promocional" class="lead product-price animate__animated animate__pulse">
+                    {{ produto.preco_de_venda_promocional|formata_preco }}
+                </span>
+                <span id="variation-preco" class="lead product-old-price text-muted animate__animated animate__fadeIn">
+                    {{ produto.preco_de_venda|formata_preco }}
+                </span>
+                {% else %}
+                <span id="variation-preco" class="lead product-price animate__animated animate__pulse">
+                    {{ produto.preco_de_venda|formata_preco }}
+                </span>
+                {% endif %}
+            </p>
+            <h4 class='h5 animate__animated animate__fadeIn'>Escolha o tamanho:</h4>
+            <form action="{% url 'produto:adicionaraocarrinho' %}" id="form-add-to-cart">
+                <input type="hidden" name="tipo" value="2"> <!-- Adiciona o tipo de produto -->
+                <div class="form-group">
+                    <select id="select-variacoes" name="doc" class="form-control form-control-lg">
+                        {% for alteracao in produto.alteracao_set.all %}
+                        {% if alteracao.preco_venda_promocional %}
+                        <option data-preco="{{ alteracao.preco_venda|formata_preco }}"
+                            data-preco-promocional="{{ alteracao.preco_venda_promocional|formata_preco }}"
+                            value="{{ alteracao.id }}">
+                            {{ alteracao.nome_variacao }}
+                        </option>
+                        {% else %}
+                        <option data-preco="{{ alteracao.preco_venda|formata_preco }}" value="{{ alteracao.id }}">
+                            {{ alteracao.nome_variacao }}
+                        </option>
+                        {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+                <h4 class='h5 animate__animated animate__fadeIn'>Selecione a Borda:</h4>
+                <div class="form-group">
+                    <select id="select-bordas" name="loc" class="form-control form-control-lg">
+                        {% for borda in produto.bordas.all %}
+                        <option value="{{ borda.id }}">
+                            {{ borda.nome }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <br>
+                <div class="text-left">
+                    <button type="submit" class="btn btn-dark btn-lg btn-block mr-2 text-warning animate__animated animate__heartBeat">
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                        Adicionar ao carrinho
+                    </button>
+                    <br>
+                    <a class="btn btn-dark btn-lg btn-block mr-2 text-warning animate__animated animate__fadeIn" href="{% url 'produto:carrinho' %}">
+                        Ir para o Carrinho
+                    </a>
+                    <br>
+                    <div class="text-center">
+                        {% if request.user.is_authenticated %}
+                        <a class="btn btn-dark btn-lg btn-block mr-2 text-warning animate__animated animate__fadeIn" href="{% url 'produto:home' %}#cardapio">
+                            Continuar a compra
+                        </a>
+                        {% else %}
+                        <a class="btn btn-dark btn-lg btn-block text-warning animate__animated animate__fadeIn" href="{% url 'perfil:criar' %}">
+                            Ir para pagamento
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const body = document.body;
+        body.classList.add('fade-slide-in');
+
+        const links = document.querySelectorAll('a');
+        links.forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                body.classList.remove('fade-slide-in');
+                body.classList.add('fade-slide-out');
+                const href = this.getAttribute('href');
+                setTimeout(() => {
+                    window.location = href;
+                }, 500); // Tempo da animação
+            });
+        });
+    });
+</script>

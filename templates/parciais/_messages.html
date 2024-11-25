@@ -1,0 +1,9 @@
+{% if messages %}
+    <br>
+    {% for message in messages %}
+    <br>
+        <div class="alert {{ message.tags }} alert-success" role="alert"> <!-- Adiciona classes de Bootstrap para estilo -->
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}

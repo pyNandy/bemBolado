@@ -1,0 +1,12 @@
+<h1>Total de Notificações: {{ count }}</h1>
+{% for notification in unread_notifications %}
+    <div class='notify'>
+        <div class='actor'>
+            {{ notification.actor }}
+        </div>
+        <div class='verb'>
+            {{ notification.verb }}
+        </div>
+    </div>
+{% endfor %}
+<a class="btn-lido" href="{% url 'marcar_notificacao_lida' %}">Confirmar recebimento do(s) Pedido(s)</a>

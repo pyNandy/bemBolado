@@ -1,0 +1,140 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'assets/custom/css/style_home.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://kit.fontawesome.com/3df637a2f2.js" crossorigin="anonymous"></script>
+    <meta http-equiv="Cache-Control" content="max-age=3600, public">
+    <link rel="preload" href="{% static 'image/logo_home.png' %}" as="image">
+    <title>Pizzaria | Bem Bolado</title>
+</head>
+<body>
+    <header class="fade-slide">
+        <div class="content">
+            <div class="logo">
+                <img src="{% static 'image/logo_home.png' %}" alt="Cupcake" class="image-to-load">
+                <h3>Bem Bolado</h3>
+            </div>
+            <ul class="list-menu fade-slide">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#sobrenos">Sobre nós</a></li>
+                <li><a href="#cardapio">Cardápio</a></li>
+                <li><a href="#contatos">Contatos</a></li>
+                <li><a href="#contatos"><i class="fab fa-instagram"></i></a></li>
+                <li><a href="#contatos"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a href="{% url 'produto:carrinho' %}"><i class="fas fa-shopping-cart"></i></a></li>
+            </ul>
+
+            <div class="menu-toggle fixed fade-slide">
+                <div class="one"></div>
+                <div class="two"></div>
+                <div class="three"></div>
+            </div>
+        </div>
+    </header>
+
+    <section class="first-section fade-slide" id="home">
+        <div class="conteudo-principal">
+            <h1 class="text-animation">Deixe seu dia mais saboroso!!!</h1>
+            <h2 class="text-animation">As pizzas mais recheadas da Região</h2>
+            <div class="btn fade-slide">
+                <button class="reservar" onclick="window.location.href='#cardapio'">Reserve a sua!</button>
+                <button class="montar" onclick="window.location.href='{% url 'perfil:criar' %}'">Faça seu Login ou crie sua conta!</button>
+            </div>
+        </div>
+    </section>
+    
+
+    <section class="sobre-nos fade-slide" id="sobrenos">
+        <div class="main">
+            <div class="contentsobre fade-slide">
+                <h2>Sobre nós</h2>
+                <p>
+                    Nós da Bem Bolado Pizzaria somos dedicados a oferecer pizzas deliciosas, 
+                    preparadas com os melhores ingredientes e com aquele toque especial que só a nossa pizzaria tem.<br><br>
+    
+                    Este site é um projeto acadêmico desenvolvido para a Universidade Cruzeiro do Sul, dentro da matéria Projeto Integrador Transdisciplinar em Sistemas de Informação II, como parte do trabalho de conclusão de curso da graduação em Sistema de Informação.<br><br>
+                                   
+                    A plataforma foi projetada para oferecer uma navegação intuitiva, um sistema de pedidos eficiente e uma gestão integrada dos processos de uma pizzaria delivery,                
+                    proporcionando uma experiência realística de mercado e reforçando a importância da interdisciplinaridade no desenvolvimento de soluções tecnológicas.<br><br>
+    
+                    A Bem Bolado Pizzaria é uma empresa fictícia e imaginária, criada exclusivamente para fins educacionais.<br>
+                </p>
+            </div>
+            <div class="img-cozinha fade-slide">
+                <img src="{% static 'image/cozinha.jpg' %}" alt="Cozinha" class="image-to-load">
+            </div>
+        </div>
+    </section>
+    
+    <section class="cardapio fade-slide" id="cardapio">
+        <h2>Cardápio</h2>
+        <div class="itens-cardapio fade-slide">
+            <div class="item fade-slide">
+                <img src="{% static 'image/pizza_salgada.jpg' %}" alt="Salgados" class="image-to-load">
+                <div class="info">
+                    <h3>Pizzas</h3>
+                    <button class="pedir" onclick="window.location.href='{% url 'produto:lista' %}'">Pedir agora</button>
+                </div>
+            </div>
+            <div class="item fade-slide">
+                <img src="{% static 'image/pizza_Doce_home.jpg' %}" alt="Doces" class="image-to-load">
+                <div class="info">
+                    <h3>Pizzas Doces</h3>
+                    <button class="pedir" onclick="window.location.href='{% url 'produto:lista_doces' %}'">Pedir agora</button>
+                </div>
+            </div>
+            <div class="item fade-slide">
+                <img src="{% static 'image/bebidas_diversas.jpg' %}" alt="Bebidas" class="image-to-load">
+                <div class="info">
+                    <h3>Bebidas</h3>
+                    <button class="pedir" onclick="window.location.href='{% url 'produto:lista_bebidas' %}'">Pedir agora</button>
+                </div>
+            </div>
+            <div class="item fade-slide">
+                <img src="{% static 'image/frete.png' %}" alt="Frete grátis" class="image-to-load">
+                <div class="info">
+                    <h3>ENTREGA GRÁTIS <br> Faça um pedido e aproveite a entrega gratis disponivel para você.</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contatos fade-slide" id="contatos">
+        <h3>Contate-nos</h3>
+        <h4>Nosso horário de atendimento é das 18:00 às 12:00 
+            <br>Segunda à Domingo</h4><br>
+        <h5>Estamos localizados no endereço:<br>
+            Rua Onélia Terezinha Sartori n° 03, Forquilhas, São José, SC
+        </h5>
+        <br>
+        <h5>Siga-nos!!!<br> Em nossas redes sociais e fique por dentro de nossas promoções!</h5>
+        <br>
+        <div class="contatos-secao fade-slide">
+            <div>
+                <i class="fas fa-phone"></i>
+                <span><a href="tel:+(48) 499615-9805">(48) 99615-9805</a></span>
+            </div>
+            <div>
+                <i class="fab fa-instagram"></i>
+                <span>@nandy.eso</span>
+            </div>
+            <div>
+                <i class="fab fa-facebook-f"></i>
+                <span>nandy.eso</span>
+            </div>
+        </div>
+    </section>
+        
+    <footer class="fade-slide">
+        <h4>Projeto Integrador Transdisciplinar em Sistemas de Informação II</h4>
+    </footer>
+
+    <script src="{% static 'assets/custom/js/scripts_home.js' %}"></script>
+</body>
+</html>

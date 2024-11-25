@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Notificações Superusuário</title>
+</head>
+<body>
+    <h1>Notificações Não Lidas</h1>
+    <ul id="notifications-list">
+        {% for notification in unread_notifications %}
+            <li>{{ notification.verb }}</li>
+        {% endfor %}
+    </ul>
+
+    <script>
+        // Exibir alerta para cada nova notificação
+        document.addEventListener('DOMContentLoaded', (event) => {
+            let notificationsList = document.getElementById('notifications-list');
+            if (notificationsList.children.length > 0) {
+                alert('Você tem novo(s) Pedido(s) não lidos!');
+            }
+        });
+    </script>
+</body>
+</html>
