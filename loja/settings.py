@@ -15,8 +15,8 @@ SECRET_KEY = '34s66f2twc8c&q*i_@@4i(yp7wp0-d_hi3il7%1iom55xz(87w'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ernane.pythonanywhere.com']
-# ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ['ernane.pythonanywhere.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -157,7 +157,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 JAZZMIN_SETTINGS = {
     "site_logo": "image/logo_home.png",
-    "login_logo": "image/logo_login.jpg",
+    "login_logo": "image/logo_login.png",
 
     'site_title': 'Bem Bolado Pizzaria',
     'site_header': 'Bem Bolado Pizzaria',
